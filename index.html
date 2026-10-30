@@ -3,31 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tea Finder</title>
+  <title>The Tea Garden Selector</title>
   <meta name="description" content="Answer five short questions and get three teas picked for you, with how to brew each one.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="page">
     <header class="masthead">
-      <h1>What should I brew?</h1>
-      <p class="lede">Five quick questions, three teas, and exactly how to make them.</p>
+      <div class="masthead-frame">
+        <h1 class="title">
+          <svg class="title-arch" viewBox="0 0 640 150" aria-hidden="true" focusable="false">
+            <path id="arch" d="M 40 138 Q 320 8 600 138" fill="none"/>
+            <text><textPath href="#arch" startOffset="50%" text-anchor="middle">The Tea Garden</textPath></text>
+          </svg>
+          <span class="visually-hidden">The Tea Garden</span>
+          <span class="title-main">Selector</span>
+        </h1>
+        <p class="masthead-band">Five questions. Three teas. Exactly how to brew them.</p>
+      </div>
     </header>
 
     <main class="layout">
       <form class="questions" id="questions" aria-label="Your answers" onsubmit="return false">
 
         <fieldset class="q" data-question="flavors">
-          <legend><span class="q-num">1</span> What should it taste like?</legend>
+          <legend><span class="q-mark" aria-hidden="true">1</span> What should it taste like?</legend>
           <p class="hint" id="flavor-hint">Pick up to three.</p>
-          <div class="options" id="flavor-options" role="group" aria-describedby="flavor-hint"></div>
+          <div class="ink-chart" id="flavor-options" role="group" aria-describedby="flavor-hint"></div>
         </fieldset>
 
         <fieldset class="q" data-question="boldness">
-          <legend><span class="q-num">2</span> How bold do you want it?</legend>
+          <legend><span class="q-mark" aria-hidden="true">2</span> How bold do you want it?</legend>
           <div class="options" data-single="boldness">
             <button type="button" data-value="delicate">Delicate</button>
             <button type="button" data-value="balanced">Balanced</button>
@@ -36,7 +45,7 @@
         </fieldset>
 
         <fieldset class="q" data-question="time">
-          <legend><span class="q-num">3</span> When are you drinking it?</legend>
+          <legend><span class="q-mark" aria-hidden="true">3</span> When are you drinking it?</legend>
           <div class="options" data-single="time">
             <button type="button" data-value="morning">Morning</button>
             <button type="button" data-value="afternoon">Afternoon</button>
@@ -46,7 +55,7 @@
         </fieldset>
 
         <fieldset class="q" data-question="food">
-          <legend><span class="q-num">4</span> Have you eaten?</legend>
+          <legend><span class="q-mark" aria-hidden="true">4</span> Have you eaten?</legend>
           <div class="options" data-single="food">
             <button type="button" data-value="none">Nothing in the last couple of hours</button>
             <button type="button" data-value="snack">A light snack</button>
@@ -64,7 +73,7 @@
         </fieldset>
 
         <fieldset class="q" data-question="mood">
-          <legend><span class="q-num">5</span> What are you in the mood for?</legend>
+          <legend><span class="q-mark" aria-hidden="true">5</span> What are you in the mood for?</legend>
           <div class="options" data-single="mood">
             <button type="button" data-value="warming">Something warming</button>
             <button type="button" data-value="soft">Something soft and quiet</button>
@@ -78,7 +87,7 @@
       </form>
 
       <section class="results" id="results" aria-live="polite" aria-label="Recommendations">
-        <p class="placeholder">Answer the questions and your teas will show up here. Change any answer and they update straight away.</p>
+        <p class="placeholder">Answer the questions and your teas will be printed here. Change any answer and they update straight away.</p>
       </section>
     </main>
 

@@ -3,10 +3,28 @@
 
   // ---- Settings -----------------------------------------------------------
 
+  // Each flavor family prints in one ink, everywhere that flavor appears.
+  // Ink names match the [data-ink] rules in styles.css. Listed in ink-chart order.
   var FLAVORS = [
-    "grassy", "floral", "malty", "smoky", "citrus", "stone fruit",
-    "spiced", "earthy", "nutty", "mineral", "vegetal", "creamy"
+    { tag: "grassy", ink: "leaf" },
+    { tag: "vegetal", ink: "leaf" },
+    { tag: "citrus", ink: "chrome" },
+    { tag: "stone fruit", ink: "chrome" },
+    { tag: "floral", ink: "vermilion" },
+    { tag: "spiced", ink: "vermilion" },
+    { tag: "smoky", ink: "indigo" },
+    { tag: "mineral", ink: "indigo" },
+    { tag: "earthy", ink: "umber" },
+    { tag: "malty", ink: "umber" },
+    { tag: "nutty", ink: "umber" },
+    { tag: "creamy", ink: "paper" }
   ];
+  var INK_NAME = {
+    leaf: "Leaf green", chrome: "Chrome yellow", vermilion: "Vermilion",
+    indigo: "Indigo", umber: "Umber", paper: "Unprinted paper"
+  };
+  var FLAVOR_INK = {};
+  FLAVORS.forEach(function (f) { FLAVOR_INK[f.tag] = f.ink; });
   var MAX_FLAVORS = 3;
 
   var BOLDNESS_TARGET = { delicate: 2, balanced: 3, assertive: 4.5 };
@@ -363,46 +381,101 @@
     var result = recommend(a);
     var html = "";
 
-    html += '<p class="results-intro">For ' + esc(article(a.boldness)) + ", " + esc(list(a.flavors.map(adj))) +
-      " cup " + esc(TIME_PHRASE[a.time]) + ", here is what I'd brew.</p>";
+    html += '<p class="results-intro">' + inkify(esc("For " + article(a.boldness) + ", " + list(a.flavors.map(adj)) +
+      " cup " + TIME_PHRASE[a.time] + ", here is what I'd brew.")) + "</p>";
 
     if (result.picks.length < 3) {
-      html += '<p class="short-note">' + esc(shortListNote(result, a)) + "</p>";
+      html += '<p class="short-note">' + inkify(esc(shortListNote(result, a))) + "</p>";
     }
 
-    var rankLabel = ["First pick", "Second pick", "Third pick"];
     result.picks.forEach(function (r, i) {
-      var t = r.tea;
-      html += '<article class="pick">' +
-        '<p class="pick-rank">' + rankLabel[i] + "</p>" +
-        "<h2>" + esc(t.name) + "</h2>" +
-        '<p class="pick-meta">' + esc(TYPE_LABEL[t.type] || t.type) + " · " + esc(t.origin) +
-        " · " + esc(CAFFEINE_LABEL[t.caffeine]) + "</p>" +
-        '<p class="pick-cup">' + esc(t.description) + "</p>" +
-        '<p class="pick-why"><strong>Why this one:</strong> ' + esc(EXPLAINERS[i](r, a)) + "</p>" +
-        '<dl class="brew">' +
-        "<div><dt>Water</dt><dd>" + esc(t.brew.water) + "</dd></div>" +
-        "<div><dt>Steep</dt><dd>" + esc(t.brew.steep) + "</dd></div>" +
-        "<div><dt>Leaf</dt><dd>" + esc(t.brew.leaf) + "</dd></div>" +
-        "</dl></article>";
+      html += labelHTML(r, a, i);
     });
 
     if (stomach(a) === "afterMeal") {
       html += '<p class="timing-note">If you ate in the last hour, give it another thirty minutes — tannins can interfere with iron absorption from a meal.</p>';
     }
 
+    // Results are "printed" (animated) only when the set of teas changes,
+    // not on every answer tweak that leaves the same picks in place.
+    var key = result.picks.map(function (r) { return r.tea.name; }).join("|");
+    resultsEl.classList.toggle("is-printing", key !== lastPrinted && key !== "");
+    lastPrinted = key;
     resultsEl.innerHTML = html;
+  }
+
+  var lastPrinted = "";
+
+  // The label's ink comes from the first of its flavors the person picked.
+  function labelInk(r) {
+    return FLAVOR_INK[r.shared[0] || r.tea.flavors[0]] || "paper";
+  }
+
+  function fahrenheit(c) { return Math.round((c * 9 / 5 + 32) / 5) * 5; }
+
+  function steepParts(steep) {
+    var m = /^([\d.–-]+)\s*(min|sec)/.exec(steep);
+    if (!m) return { num: steep, sub: "" };
+    var plural = m[1] !== "1";
+    return { num: m[1], sub: m[2] === "min" ? (plural ? "minutes" : "minute") : "seconds" };
+  }
+
+  function labelHTML(r, a, i) {
+    var t = r.tea;
+    var b = t.brew;
+    var steep = steepParts(b.steep);
+    var ink = labelInk(r);
+    var tags = t.flavors.map(function (f) {
+      return '<li data-ink="' + FLAVOR_INK[f] + '">' + esc(cap(f)) + "</li>";
+    }).join("");
+
+    return '<article class="label" style="--i:' + i + '">' +
+      '<header class="label-head" data-ink="' + ink + '">' +
+        '<div class="seal" aria-hidden="true"><span><span class="seal-no">No.</span><br><span class="seal-num">' + (i + 1) + "</span></span></div>" +
+        "<div>" +
+          '<h2 class="tea-name"><span class="visually-hidden">Pick ' + (i + 1) + ": </span>" + esc(t.name) + "</h2>" +
+          '<p class="tea-grade">' + esc(TYPE_LABEL[t.type] || t.type) + " — " + esc(t.origin) + "</p>" +
+        "</div>" +
+      "</header>" +
+      '<div class="label-body">' +
+        '<ul class="tags" aria-label="Flavors and caffeine">' + tags +
+          '<li class="caffeine">' + esc(CAFFEINE_LABEL[t.caffeine]) + "</li></ul>" +
+        '<p class="cup">' + inkify(esc(t.description)) + "</p>" +
+        '<p class="why"><span class="why-lead">Why this one.</span> ' + inkify(esc(EXPLAINERS[i](r, a))) + "</p>" +
+        '<dl class="brew">' +
+          '<div><dt>Water</dt><dd><span class="brew-num">' + b.tempC + '°C</span><span class="brew-sub">' + fahrenheit(b.tempC) + "°F</span></dd></div>" +
+          '<div><dt>Steep</dt><dd><span class="brew-num">' + esc(steep.num) + '</span><span class="brew-sub">' + esc(steep.sub) + "</span></dd></div>" +
+          '<div><dt>Leaf</dt><dd><span class="brew-num">' + b.grams + ' g</span><span class="brew-sub">' + esc(b.measure) + " per cup</span></dd></div>" +
+        "</dl>" +
+        (b.note ? '<p class="brew-note">' + esc(b.note) + "</p>" : "") +
+      "</div>" +
+    "</article>";
+  }
+
+  // Wraps flavor words in already-escaped text so they carry their ink.
+  var FLAVOR_WORDS = /\b(grassy|vegetal|citrus|stone[- ]fruit|floral|spiced|smoky|mineral|earthy|malty|nutty|creamy)\b/gi;
+  function inkify(escaped) {
+    return escaped.replace(FLAVOR_WORDS, function (w) {
+      var ink = FLAVOR_INK[w.toLowerCase().replace("-", " ")];
+      return '<span class="inked" data-ink="' + ink + '">' + w + "</span>";
+    });
   }
 
   // ---- Controls -----------------------------------------------------------
 
   function buildFlavorOptions() {
     var wrap = $("#flavor-options");
+    var check = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="square"/></svg>';
     FLAVORS.forEach(function (f) {
       var b = document.createElement("button");
       b.type = "button";
-      b.dataset.value = f;
-      b.textContent = cap(f);
+      b.className = "ink-tile";
+      b.dataset.value = f.tag;
+      b.dataset.ink = f.ink;
+      b.setAttribute("aria-label", cap(f.tag));
+      b.innerHTML = '<span class="swatch">' + check + "</span>" +
+        '<span class="tile-name">' + esc(cap(f.tag)) + "</span>" +
+        '<span class="tile-ink" aria-hidden="true">' + INK_NAME[f.ink] + "</span>";
       wrap.appendChild(b);
     });
     wrap.addEventListener("click", function (e) {
@@ -441,7 +514,6 @@
     document.querySelectorAll("#flavor-options button").forEach(function (b) {
       var on = answers.flavors.indexOf(b.dataset.value) !== -1;
       b.setAttribute("aria-pressed", on);
-      b.classList.toggle("is-capped", full && !on);
       b.setAttribute("aria-disabled", full && !on);
     });
     $("#flavor-hint").textContent = full ?

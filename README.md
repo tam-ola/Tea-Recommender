@@ -5,7 +5,7 @@ A static, single-page tea finder. Answer five quick questions and get three teas
 ## Files
 
 - `index.html`: the page and the five questions
-- `styles.css`: layout and styling, with light and dark themes
+- `styles.css`: the inks, panels, and labels
 - `app.js`: scoring, filtering, the written explanations, and rendering
 - `teas.json`: the tea catalog (40 teas)
 
@@ -34,7 +34,7 @@ Every tea in `teas.json` looks like this:
   "intensity": 3,
   "caffeine": "medium",
   "astringency": 3,
-  "brew": { "water": "75°C / 165°F", "steep": "1 minute", "leaf": "1 tsp (3 g) per cup" },
+  "brew": { "tempC": 75, "steep": "1 min", "grams": 3, "measure": "1 tsp", "note": "" },
   "description": "Bright and grassy, with a savory, steamed-greens edge and a brisk, slightly bitter finish."
 }
 ```
@@ -44,8 +44,27 @@ Every tea in `teas.json` looks like this:
 - `intensity`: 1–5, how assertive the cup is
 - `caffeine`: `none`, `low`, `medium`, or `high`
 - `astringency`: 1–5, how drying and tannic it is
+- `brew.tempC`: water temperature in °C (°F is worked out on the page)
+- `brew.steep`: a number or range plus `min` or `sec`, such as `"3 min"`, `"2–3 min"`, or `"20–30 sec"`
+- `brew.grams`: leaf per 250 ml cup; `brew.measure` is the spoon equivalent, such as `"1 heaped tsp"`
+- `brew.note`: an optional extra instruction, such as a rinse or milk, or `""`
 
 To add a tea, copy an entry, edit it, and keep the JSON valid (watch the commas).
+
+## Inks
+
+The design uses six printing inks on a paper ground, and each flavor family always prints in the same ink:
+
+| Ink | Flavors |
+| --- | --- |
+| Leaf green | grassy, vegetal |
+| Chrome yellow | citrus, stone fruit |
+| Vermilion | floral, spiced |
+| Indigo | smoky, mineral |
+| Umber | earthy, malty, nutty |
+| Unprinted paper, outlined in black | creamy |
+
+Black is used for type and outlines. The ink for each flavor is set in `FLAVORS` at the top of `app.js`, and the colors are set in `styles.css`.
 
 ## How recommendations are scored
 

@@ -1,31 +1,27 @@
-:root {
-  --bg: #f5efe4;
-  --surface: #fbf8f2;
-  --ink: #2a241d;
-  --ink-soft: #5e5448;
-  --line: #d9cfbf;
-  --accent: #56653a;
-  --accent-ink: #fbf8f2;
-  --accent-soft: #e4e6d3;
-  --amber: #9a5b1f;
-  --serif: "Fraunces", Georgia, "Times New Roman", serif;
-  --sans: "Source Sans 3", -apple-system, "Segoe UI", Roboto, sans-serif;
-  color-scheme: light;
-}
+/*
+  Six printing inks on a paper ground. Every flavor family prints in one ink
+  (see FLAVORS in app.js); black carries outlines and type.
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1c1915;
-    --surface: #25211c;
-    --ink: #ece4d6;
-    --ink-soft: #b3a895;
-    --line: #3d362d;
-    --accent: #a9b97c;
-    --accent-ink: #1c1915;
-    --accent-soft: #333826;
-    --amber: #e0a464;
-    color-scheme: dark;
-  }
+  Contrast against paper: black 15.8:1, indigo 9.7:1, umber 9.4:1,
+  leaf 5.2:1, vermilion 4.9:1. Chrome yellow is 1.6:1, so it never carries
+  text on paper and is always outlined in black; black on chrome is 9.9:1.
+*/
+:root {
+  --paper: #f4ecd6;
+  --black: #16120e;
+  --chrome: #f2b200;
+  --vermilion: #be2f17;
+  --leaf: #26702b;
+  --indigo: #22347a;
+  --umber: #5a3216;
+
+  --slab: "Alfa Slab One", "Rockwell", "Roboto Slab", Georgia, serif;
+  --condensed: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --body: "Source Sans 3", -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --rule: 3px solid var(--black);
+  --hair: 1px solid var(--black);
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
@@ -34,49 +30,101 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--black);
+  font-family: var(--body);
   font-size: 17px;
   line-height: 1.5;
 }
 
 .page {
-  max-width: 1120px;
+  max-width: 1160px;
   margin: 0 auto;
-  padding: 40px 16px 32px;
+  padding: 24px 16px 32px;
 }
 
-.masthead { margin-bottom: 32px; }
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
 
-h1, h2, h3 {
-  font-family: var(--serif);
+:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 3px;
+}
+
+/* ---- Masthead: a tea chest label ------------------------------------- */
+
+.masthead {
+  background: var(--chrome);
+  border: var(--rule);
+  padding: 8px;
+  margin-bottom: 32px;
+}
+
+.masthead-frame {
+  border: var(--hair);
+  outline: var(--hair);
+  outline-offset: -6px;
+  padding: 18px 16px 0;
+  text-align: center;
+}
+
+.title { margin: 0; line-height: 1; font-weight: normal; }
+
+.title-arch {
+  display: block;
+  width: min(100%, 560px);
+  margin: 0 auto -6px;
+  overflow: visible;
+}
+
+.title-arch text {
+  font-family: var(--slab);
+  font-size: 64px;
+  fill: var(--black);
+  letter-spacing: 1px;
+}
+
+.title-main {
+  display: block;
+  font-family: var(--condensed);
+  font-weight: 800;
+  font-size: clamp(3.4rem, 13vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  padding-bottom: 12px;
+}
+
+.masthead-band {
+  margin: 0 -16px;
+  padding: 10px 16px;
+  background: var(--black);
+  color: var(--paper);
+  font-family: var(--condensed);
   font-weight: 600;
-  line-height: 1.15;
-  margin: 0;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
 }
 
-h1 { font-size: clamp(2rem, 5vw, 2.8rem); letter-spacing: -0.01em; }
+/* ---- Grid ---------------------------------------------------------------- */
 
-.lede { color: var(--ink-soft); margin: 8px 0 0; font-size: 1.1rem; }
+.layout { display: grid; gap: 32px; }
 
-.layout {
-  display: grid;
-  gap: 40px;
+@media (min-width: 940px) {
+  .layout { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: start; gap: 40px; }
 }
 
-@media (min-width: 900px) {
-  .layout { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: start; }
-  .results { position: sticky; top: 24px; }
-}
-
-/* Questions */
+/* ---- Questions: ruled panels -------------------------------------------- */
 
 .q {
   border: 0;
-  border-top: 1px solid var(--line);
+  border-top: var(--rule);
   margin: 0;
-  padding: 20px 0 22px;
+  padding: 16px 0 24px;
   min-width: 0;
 }
 
@@ -84,170 +132,381 @@ h1 { font-size: clamp(2rem, 5vw, 2.8rem); letter-spacing: -0.01em; }
   float: left;
   width: 100%;
   padding: 0;
-  font-family: var(--serif);
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--condensed);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.1;
 }
 
 .q legend + * { clear: both; }
 
-.q-num {
-  display: inline-block;
-  width: 1.6em;
-  color: var(--amber);
-  font-weight: 400;
+.q-mark {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  background: var(--black);
+  color: var(--paper);
+  font-family: var(--slab);
+  font-size: 1.15rem;
+  font-weight: normal;
 }
 
-.hint { margin: -4px 0 10px; color: var(--ink-soft); font-size: 0.95rem; }
+.hint { margin: -6px 0 12px; font-size: 0.97rem; }
+
+/* Single-choice options: printed type blocks */
 
 .options { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .options button {
   font: inherit;
-  font-size: 0.98rem;
-  color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 8px 15px;
+  font-family: var(--condensed);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  color: var(--black);
+  background: var(--paper);
+  border: 2px solid var(--black);
+  border-radius: 0;
+  padding: 7px 14px;
   cursor: pointer;
-  transition: background-color 120ms, border-color 120ms, color 120ms;
   text-align: left;
 }
 
-.options button:hover { border-color: var(--accent); }
-
-.options button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
+.options button:hover { background: var(--chrome); }
 
 .options button[aria-pressed="true"] {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-ink);
+  background: var(--black);
+  color: var(--paper);
 }
 
-.options button.is-capped { opacity: 0.45; }
+.followup { margin-top: 16px; padding-left: 14px; border-left: var(--rule); }
 
-.followup { margin-top: 16px; padding-left: 14px; border-left: 2px solid var(--line); }
+.followup-label { margin: 0 0 8px; font-family: var(--condensed); font-weight: 700; font-size: 1.2rem; }
 
-.followup-label { margin: 0 0 8px; color: var(--ink-soft); font-size: 0.95rem; }
+/* Flavor picker: a printer's ink chart */
+
+.ink-chart {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 2px solid var(--black);
+  border-left: 2px solid var(--black);
+}
+
+@media (min-width: 560px) and (max-width: 939px) {
+  .ink-chart { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.ink-tile {
+  --ink: var(--paper);
+  --on-ink: var(--black);
+  font: inherit;
+  color: var(--black);
+  background: var(--paper);
+  border: 0;
+  border-right: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+  border-radius: 0;
+  padding: 8px 8px 10px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.swatch {
+  display: grid;
+  place-items: center;
+  height: 40px;
+  background: var(--ink);
+  border: 2px solid var(--black);
+  color: var(--on-ink);
+}
+
+.swatch svg { width: 22px; height: 22px; visibility: hidden; }
+
+.tile-name {
+  font-family: var(--condensed);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.05;
+}
+
+.tile-ink { font-size: 0.82rem; line-height: 1.2; }
+
+.ink-tile:hover .swatch { outline: 2px solid var(--black); outline-offset: 2px; }
+
+.ink-tile[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
+.ink-tile[aria-pressed="true"] .swatch { border-color: var(--on-ink); }
+.ink-tile[aria-pressed="true"] .swatch svg { visibility: visible; }
+.ink-tile[aria-pressed="true"][data-ink="paper"] .swatch { background: var(--black); color: var(--paper); }
+
+.ink-tile:focus-visible { outline-offset: -6px; outline-color: var(--black); box-shadow: inset 0 0 0 9px var(--paper); }
+.ink-tile[aria-pressed="true"]:focus-visible { outline-color: var(--on-ink); box-shadow: none; }
+
+.ink-tile[aria-disabled="true"] { cursor: not-allowed; }
+/* At three picks the rest print as outlines only: still readable, clearly off. */
+.ink-tile[aria-disabled="true"] .swatch {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 6px var(--ink);
+}
+.ink-tile[aria-disabled="true"]:hover .swatch { outline: none; }
+
+/* Ink assignments */
+[data-ink="leaf"]      { --ink: var(--leaf);      --on-ink: var(--paper); }
+[data-ink="chrome"]    { --ink: var(--chrome);    --on-ink: var(--black); }
+[data-ink="vermilion"] { --ink: var(--vermilion); --on-ink: var(--paper); }
+[data-ink="indigo"]    { --ink: var(--indigo);    --on-ink: var(--paper); }
+[data-ink="umber"]     { --ink: var(--umber);     --on-ink: var(--paper); }
+[data-ink="paper"]     { --ink: var(--paper);     --on-ink: var(--black); }
 
 .reset {
   font: inherit;
-  font-size: 0.95rem;
+  font-size: 0.97rem;
   background: none;
   border: 0;
   padding: 4px 0;
-  color: var(--ink-soft);
+  color: var(--black);
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
 }
 
-/* Results */
+/* Flavor words in running text carry their ink as an underline */
+.inked {
+  text-decoration-line: underline;
+  text-decoration-color: var(--ink);
+  text-decoration-thickness: 0.28em;
+  text-underline-offset: 0.12em;
+  text-decoration-skip-ink: none;
+}
+.inked[data-ink="paper"] { text-decoration-color: var(--black); text-decoration-style: dotted; text-decoration-thickness: 0.14em; }
 
-.results {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 14px;
+/* ---- Results ------------------------------------------------------------ */
+
+.results { min-width: 0; }
+
+.placeholder {
+  margin: 0;
+  border: var(--rule);
+  outline: var(--hair);
+  outline-offset: -8px;
   padding: 28px 24px;
+  font-size: 1.05rem;
 }
-
-@media (max-width: 480px) {
-  .results { padding: 22px 16px; }
-}
-
-.placeholder { margin: 0; color: var(--ink-soft); }
 
 .results-intro {
-  font-family: var(--serif);
-  font-size: 1.15rem;
-  margin: 0 0 6px;
+  margin: 0 0 16px;
+  font-family: var(--condensed);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.15;
 }
-
-.results-summary { margin: 0 0 22px; color: var(--ink-soft); font-size: 0.98rem; }
 
 .short-note {
-  margin: 0 0 22px;
-  padding: 12px 14px;
-  border-left: 3px solid var(--amber);
-  background: var(--bg);
-  border-radius: 0 8px 8px 0;
+  margin: 0 0 20px;
+  padding: 12px 16px;
+  border: var(--rule);
+  border-left-width: 14px;
+  border-left-color: var(--vermilion);
 }
 
-.pick + .pick {
-  margin-top: 26px;
-  padding-top: 26px;
-  border-top: 1px solid var(--line);
+/* A label for each tea */
+
+.label {
+  border: var(--rule);
+  background: var(--paper);
 }
 
-.pick-rank {
-  margin: 0 0 4px;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--amber);
+.label + .label { margin-top: 20px; }
+
+.label-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--ink);
+  color: var(--on-ink);
+  border-bottom: var(--rule);
+}
+
+.seal {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--black);
+  border: var(--rule);
+  box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--black);
+  margin: 4px;
+  line-height: 1;
+  text-align: center;
+}
+
+.seal-no { font-family: var(--condensed); font-weight: 700; font-size: 0.85rem; }
+.seal-num { font-family: var(--slab); font-size: 1.7rem; margin-top: -2px; }
+
+.tea-name {
+  margin: 0;
+  font-family: var(--slab);
+  font-weight: normal;
+  font-size: clamp(1.55rem, 4.6vw, 2.1rem);
+  line-height: 1.02;
+  letter-spacing: 0.005em;
+  overflow-wrap: anywhere;
+}
+
+.tea-grade {
+  margin: 6px 0 0;
+  font-family: var(--condensed);
   font-weight: 600;
+  font-size: 1.12rem;
+  line-height: 1.2;
 }
 
-.pick h2 { font-size: 1.55rem; }
+.label-body { padding: 16px 16px 18px; }
 
-.pick-meta { margin: 4px 0 12px; color: var(--ink-soft); font-size: 0.95rem; }
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+  font-family: var(--condensed);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
 
-.pick-cup {
-  margin: 0 0 14px;
-  font-family: var(--serif);
+.tags li { display: flex; align-items: center; gap: 6px; }
+
+.tags li::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  background: var(--ink);
+  border: 2px solid var(--black);
+}
+
+.tags .caffeine { font-weight: 600; }
+.tags .caffeine::before { display: none; }
+
+.cup {
+  margin: 0 0 12px;
+  font-size: 1.12rem;
   font-style: italic;
-  font-size: 1.08rem;
 }
 
-.pick-why { margin: 0 0 16px; }
+.why {
+  margin: 0 0 16px;
+  padding-top: 12px;
+  border-top: var(--hair);
+}
 
-.pick-why strong { font-weight: 600; }
+.why-lead { font-family: var(--condensed); font-weight: 700; font-size: 1.15rem; }
+
+/* Brewing numbers, printed like a label's weight and grade */
 
 .brew {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
   margin: 0;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  overflow: hidden;
+  border: var(--rule);
 }
 
-.brew div { background: var(--bg); padding: 10px 12px; }
+.brew > div { padding: 8px 12px 10px; min-width: 0; }
+.brew > div + div { border-left: var(--rule); }
 
 .brew dt {
-  font-size: 0.75rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--condensed);
+  font-weight: 700;
+  font-size: 1.05rem;
 }
 
-.brew dd { margin: 2px 0 0; font-size: 0.95rem; }
+.brew dd { margin: 0; }
 
-@media (max-width: 560px) {
+.brew-num {
+  display: block;
+  font-family: var(--condensed);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 7vw, 2.9rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.brew-sub { display: block; font-size: 0.93rem; line-height: 1.25; margin-top: 3px; }
+
+.brew-note { margin: 10px 0 0; font-size: 0.97rem; }
+
+@media (max-width: 420px) {
   .brew { grid-template-columns: 1fr; }
+  .brew > div + div { border-left: 0; border-top: var(--rule); }
+  .brew > div { display: grid; grid-template-columns: 4.5rem 1fr; align-items: baseline; column-gap: 8px; }
+  .brew dd { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .seal { width: 54px; height: 54px; }
 }
 
 .timing-note {
-  margin: 26px 0 0;
-  padding-top: 16px;
-  border-top: 1px dashed var(--line);
-  color: var(--ink-soft);
-  font-size: 0.97rem;
+  margin: 20px 0 0;
+  padding: 12px 16px;
+  background: var(--indigo);
+  color: var(--paper);
+  border: var(--rule);
 }
 
+/* ---- Footer ------------------------------------------------------------- */
+
 .footer {
-  margin-top: 48px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-  color: var(--ink-soft);
-  font-size: 0.93rem;
+  margin-top: 40px;
+  border-top: var(--rule);
+  border-bottom: var(--hair);
+  padding: 12px 0;
 }
 
 .footer p { margin: 0; }
+
+/* ---- The one moment of motion: results being printed -------------------- */
+
+@keyframes press {
+  from { opacity: 0; transform: translateY(-10px) scale(1.015); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes ink-roll {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .is-printing .results-intro { animation: rise 260ms ease-out both; }
+  .is-printing .label {
+    animation: press 340ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(120ms + var(--i) * 170ms);
+  }
+  .is-printing .label-head {
+    animation: ink-roll 420ms cubic-bezier(0.6, 0, 0.2, 1) both;
+    animation-delay: calc(200ms + var(--i) * 170ms);
+  }
+  .is-printing .brew-num {
+    animation: rise 300ms ease-out both;
+    animation-delay: calc(480ms + var(--i) * 170ms);
+  }
+  .is-printing .short-note { animation: rise 280ms ease-out both; animation-delay: 60ms; }
+  .is-printing .timing-note { animation: rise 300ms ease-out both; animation-delay: 900ms; }
+}
