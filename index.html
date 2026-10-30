@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tea Finder</title>
+  <meta name="description" content="Answer five short questions and get three teas picked for you, with how to brew each one.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <h1>What should I brew?</h1>
+      <p class="lede">Five quick questions, three teas, and exactly how to make them.</p>
+    </header>
+
+    <main class="layout">
+      <form class="questions" id="questions" aria-label="Your answers" onsubmit="return false">
+
+        <fieldset class="q" data-question="flavors">
+          <legend><span class="q-num">1</span> What should it taste like?</legend>
+          <p class="hint" id="flavor-hint">Pick up to three.</p>
+          <div class="options" id="flavor-options" role="group" aria-describedby="flavor-hint"></div>
+        </fieldset>
+
+        <fieldset class="q" data-question="boldness">
+          <legend><span class="q-num">2</span> How bold do you want it?</legend>
+          <div class="options" data-single="boldness">
+            <button type="button" data-value="delicate">Delicate</button>
+            <button type="button" data-value="balanced">Balanced</button>
+            <button type="button" data-value="assertive">Assertive</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="q" data-question="time">
+          <legend><span class="q-num">3</span> When are you drinking it?</legend>
+          <div class="options" data-single="time">
+            <button type="button" data-value="morning">Morning</button>
+            <button type="button" data-value="afternoon">Afternoon</button>
+            <button type="button" data-value="evening">Evening</button>
+            <button type="button" data-value="bed">Right before bed</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="q" data-question="food">
+          <legend><span class="q-num">4</span> Have you eaten?</legend>
+          <div class="options" data-single="food">
+            <button type="button" data-value="none">Nothing in the last couple of hours</button>
+            <button type="button" data-value="snack">A light snack</button>
+            <button type="button" data-value="meal">A full meal</button>
+          </div>
+          <div class="followup" id="ate-when" hidden>
+            <p class="followup-label">How long ago?</p>
+            <div class="options" data-single="ateWhen">
+              <button type="button" data-value="now">Just now</button>
+              <button type="button" data-value="30">About 30 minutes</button>
+              <button type="button" data-value="60">An hour or more</button>
+              <button type="button" data-value="120">Two hours or more</button>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="q" data-question="mood">
+          <legend><span class="q-num">5</span> What are you in the mood for?</legend>
+          <div class="options" data-single="mood">
+            <button type="button" data-value="warming">Something warming</button>
+            <button type="button" data-value="soft">Something soft and quiet</button>
+            <button type="button" data-value="bracing">Something bracing</button>
+            <button type="button" data-value="clean">Something clean and refreshing</button>
+            <button type="button" data-value="any">No preference, just make it taste good</button>
+          </div>
+        </fieldset>
+
+        <button type="button" class="reset" id="reset">Clear answers</button>
+      </form>
+
+      <section class="results" id="results" aria-live="polite" aria-label="Recommendations">
+        <p class="placeholder">Answer the questions and your teas will show up here. Change any answer and they update straight away.</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Herbal teas can interact with some medications — check with a pharmacist if you take any.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
