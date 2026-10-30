@@ -1,5 +1,5 @@
 {
-  "_readme": "Tea catalog. Each entry: name, type (green | black | oolong | white | puerh | herbal), origin, flavors (pick from: grassy, floral, malty, smoky, citrus, stone fruit, spiced, earthy, nutty, mineral, vegetal, creamy), intensity 1-5 (how assertive the cup is), caffeine (none | low | medium | high), astringency 1-5 (how drying and tannic), brew { water, steep, leaf }, and a one-sentence description of the cup. Add a tea by copying any entry and editing it.",
+  "_readme": "Tea catalog. Each entry: name, type (green | black | oolong | white | puerh | herbal), origin, flavors (pick from: grassy, floral, malty, smoky, citrus, stone fruit, spiced, earthy, nutty, mineral, vegetal, creamy), intensity 1-5 (how assertive the cup is), caffeine (none | low | medium | high), astringency 1-5 (how drying and tannic), brew { tempC (water temperature in Celsius), steep (e.g. \"3 min\" or \"2–3 min\"), grams of leaf per 250 ml cup, measure (the spoon equivalent), note (optional extra instruction, or \"\") }, and a one-sentence description of the cup. Add a tea by copying any entry and editing it.",
   "teas": [
     {
       "name": "Sencha",
@@ -9,7 +9,7 @@
       "intensity": 3,
       "caffeine": "medium",
       "astringency": 3,
-      "brew": { "water": "75°C / 165°F", "steep": "1 minute", "leaf": "1 tsp (3 g) per cup" },
+      "brew": { "tempC": 75, "steep": "1 min", "grams": 3, "measure": "1 tsp", "note": "" },
       "description": "Bright and grassy, with a savory, steamed-greens edge and a brisk, slightly bitter finish."
     },
     {
@@ -20,7 +20,7 @@
       "intensity": 4,
       "caffeine": "high",
       "astringency": 2,
-      "brew": { "water": "60°C / 140°F", "steep": "2 minutes", "leaf": "2 tsp (5 g) in a small cup of water" },
+      "brew": { "tempC": 60, "steep": "2 min", "grams": 5, "measure": "2 tsp", "note": "Use a small cup — about 60 ml of water." },
       "description": "Thick, brothy, and intensely savory, like a sweet seaweed broth with almost no bitterness."
     },
     {
@@ -31,7 +31,7 @@
       "intensity": 4,
       "caffeine": "high",
       "astringency": 3,
-      "brew": { "water": "80°C / 175°F", "steep": "Whisk for 20–30 seconds, no steeping", "leaf": "1 tsp (2 g) powder in 70 ml water" },
+      "brew": { "tempC": 80, "steep": "20–30 sec", "grams": 2, "measure": "1 tsp", "note": "Whisk, don't steep, in about 70 ml of water." },
       "description": "Dense and vivid green, savory and sweet at once, with a velvety body and a lingering bittersweet edge."
     },
     {
@@ -42,7 +42,7 @@
       "intensity": 2,
       "caffeine": "low",
       "astringency": 2,
-      "brew": { "water": "85°C / 185°F", "steep": "2–3 minutes", "leaf": "1 heaped tsp (4 g) per cup" },
+      "brew": { "tempC": 85, "steep": "2–3 min", "grams": 4, "measure": "1 heaped tsp", "note": "" },
       "description": "Toasted rice gives it a warm, popcorn-like nuttiness over a light, grassy green tea base."
     },
     {
@@ -53,7 +53,7 @@
       "intensity": 2,
       "caffeine": "low",
       "astringency": 1,
-      "brew": { "water": "90°C / 195°F", "steep": "1 minute", "leaf": "1 heaped tbsp (3 g) per cup" },
+      "brew": { "tempC": 90, "steep": "1 min", "grams": 3, "measure": "1 heaped tbsp", "note": "" },
       "description": "Roasty and mellow, with toasted-grain and caramel notes and almost no bitterness."
     },
     {
@@ -64,7 +64,7 @@
       "intensity": 1,
       "caffeine": "low",
       "astringency": 1,
-      "brew": { "water": "80°C / 175°F", "steep": "2 minutes", "leaf": "1 heaped tsp (3 g) per cup" },
+      "brew": { "tempC": 80, "steep": "2 min", "grams": 3, "measure": "1 heaped tsp", "note": "" },
       "description": "Light, sweet, and creamy, with a gentle nutty-vegetal flavor from the twigs and stems it is made from."
     },
     {
@@ -75,7 +75,7 @@
       "intensity": 2,
       "caffeine": "medium",
       "astringency": 2,
-      "brew": { "water": "80°C / 175°F", "steep": "2–3 minutes", "leaf": "1 tbsp (3 g) per cup" },
+      "brew": { "tempC": 80, "steep": "2–3 min", "grams": 3, "measure": "1 tbsp", "note": "" },
       "description": "Pan-fired and flat-leafed, tasting of toasted chestnut and sweet snap peas with a smooth finish."
     },
     {
@@ -86,7 +86,7 @@
       "intensity": 4,
       "caffeine": "medium",
       "astringency": 4,
-      "brew": { "water": "80°C / 175°F", "steep": "2 minutes", "leaf": "1 tsp (2.5 g) per cup" },
+      "brew": { "tempC": 80, "steep": "2 min", "grams": 2.5, "measure": "1 tsp", "note": "" },
       "description": "Rolled into tight pellets, it brews a bold, faintly smoky green with a firm, drying grip."
     },
     {
@@ -97,7 +97,7 @@
       "intensity": 2,
       "caffeine": "medium",
       "astringency": 2,
-      "brew": { "water": "80°C / 175°F", "steep": "3 minutes", "leaf": "1 tsp (3 g) per cup" },
+      "brew": { "tempC": 80, "steep": "3 min", "grams": 3, "measure": "1 tsp", "note": "" },
       "description": "Hand-rolled green tea scented with fresh jasmine blossoms — perfumed, sweet, and smooth."
     },
     {
@@ -108,7 +108,7 @@
       "intensity": 5,
       "caffeine": "high",
       "astringency": 4,
-      "brew": { "water": "100°C / 212°F", "steep": "4 minutes", "leaf": "1 tsp (2.5 g) per cup" },
+      "brew": { "tempC": 100, "steep": "4 min", "grams": 2.5, "measure": "1 tsp", "note": "Takes milk well." },
       "description": "Brisk, full-bodied, and deeply malty — the backbone of most breakfast blends, and happy with milk."
     },
     {
@@ -119,7 +119,7 @@
       "intensity": 2,
       "caffeine": "medium",
       "astringency": 3,
-      "brew": { "water": "90°C / 195°F", "steep": "3 minutes", "leaf": "1 heaped tsp (2.5 g) per cup" },
+      "brew": { "tempC": 90, "steep": "3 min", "grams": 2.5, "measure": "1 heaped tsp", "note": "Best without milk." },
       "description": "Pale gold and lively, with fresh floral and green-grape notes and a crisp, slightly drying finish."
     },
     {
@@ -130,7 +130,7 @@
       "intensity": 3,
       "caffeine": "medium",
       "astringency": 3,
-      "brew": { "water": "95°C / 205°F", "steep": "3–4 minutes", "leaf": "1 tsp (2.5 g) per cup" },
+      "brew": { "tempC": 95, "steep": "3–4 min", "grams": 2.5, "measure": "1 tsp", "note": "" },
       "description": "Smooth and gently winey, with dried-plum fruit, a hint of cocoa, and a faint wisp of smoke."
     },
     {
@@ -141,7 +141,7 @@
       "intensity": 5,
       "caffeine": "medium",
       "astringency": 3,
-      "brew": { "water": "95°C / 205°F", "steep": "3–4 minutes", "leaf": "1 tsp (2.5 g) per cup" },
+      "brew": { "tempC": 95, "steep": "3–4 min", "grams": 2.5, "measure": "1 tsp", "note": "" },
       "description": "Smoked over pinewood fires, it tastes like a campfire — resinous and savory, with a dried-fruit sweetness underneath."
     },
     {
@@ -152,7 +152,7 @@
       "intensity": 4,
       "caffeine": "high",
       "astringency": 4,
-      "brew": { "water": "100°C / 212°F", "steep": "3–4 minutes", "leaf": "1 tsp (2.5 g) per cup" },
+      "brew": { "tempC": 100, "steep": "3–4 min", "grams": 2.5, "measure": "1 tsp", "note": "" },
       "description": "Bright, brisk, and coppery, with a lively citrus edge that also makes it a great iced tea."
     },
     {
@@ -163,7 +163,7 @@
       "intensity": 3,
       "caffeine": "medium",
       "astringency": 2,
-      "brew": { "water": "95°C / 205°F", "steep": "3–4 minutes", "leaf": "1 heaped tsp (3 g) per cup" },
+      "brew": { "tempC": 95, "steep": "3–4 min", "grams": 3, "measure": "1 heaped tsp", "note": "" },
       "description": "Golden-tipped and plush, with malty sweet-potato and cocoa notes and very little bite."
     },
     {
@@ -174,7 +174,7 @@
       "intensity": 4,
       "caffeine": "high",
       "astringency": 4,
-      "brew": { "water": "100°C / 212°F", "steep": "4 minutes", "leaf": "1 tsp (2.5 g) or one bag per cup" },
+      "brew": { "tempC": 100, "steep": "4 min", "grams": 2.5, "measure": "1 tsp", "note": "Or one bag. Takes milk well." },
       "description": "A sturdy, brisk blend — malty, round, and built to take milk."
     },
     {
@@ -185,7 +185,7 @@
       "intensity": 3,
       "caffeine": "medium",
       "astringency": 3,
-      "brew": { "water": "95°C / 205°F", "steep": "3–4 minutes", "leaf": "1 tsp (2.5 g) per cup" },
+      "brew": { "tempC": 95, "steep": "3–4 min", "grams": 2.5, "measure": "1 tsp", "note": "" },
       "description": "Black tea perfumed with bergamot oil — fragrant and citrusy over a brisk, clean base."
     },
     {
@@ -196,7 +196,7 @@
       "intensity": 5,
       "caffeine": "high",
       "astringency": 3,
-      "brew": { "water": "Simmer in half water, half milk", "steep": "5 minutes at a low simmer", "leaf": "1 tbsp (5 g) spiced blend per cup" },
+      "brew": { "tempC": 100, "steep": "5 min", "grams": 5, "measure": "1 tbsp", "note": "Simmer in half water, half milk, then sweeten to taste." },
       "description": "Strong black tea simmered with cardamom, ginger, cinnamon, and clove — sweet-spiced and rich with milk."
     },
     {
@@ -207,7 +207,7 @@
       "intensity": 2,
       "caffeine": "medium",
       "astringency": 2,
-      "brew": { "water": "95°C / 205°F", "steep": "3 minutes (leaves re-steep several times)", "leaf": "1 heaped tsp (3 g) per cup" },
+      "brew": { "tempC": 95, "steep": "3 min", "grams": 3, "measure": "1 heaped tsp", "note": "The leaves re-steep several times." },
       "description": "Orchid-like and buttery, with a lilac perfume and a sweet, lingering finish."
     },
     {
@@ -218,7 +218,7 @@
       "intensity": 2,
       "caffeine": "medium",
       "astringency": 1,
-      "brew": { "water": "90°C / 195°F", "steep": "3 minutes", "leaf": "1 heaped tsp (3 g) per cup" },
+      "brew": { "tempC": 90, "steep": "3 min", "grams": 3, "measure": "1 heaped tsp", "note": "The leaves re-steep several times." },
       "description": "Soft and naturally creamy, with a sweet-milk, buttery texture and a light floral lift."
     },
     {
@@ -229,7 +229,7 @@
       "intensity": 2,
       "caffeine": "medium",
       "astringency": 2,
-      "brew": { "water": "95°C / 205°F", "steep": "3 minutes", "leaf": "1 heaped tsp (3 g) per cup" },
+      "brew": { "tempC": 95, "steep": "3 min", "grams": 3, "measure": "1 heaped tsp", "note": "The leaves re-steep several times." },
       "description": "Light and lush, with a sweet floral fragrance, a creamy body, and a clean, mineral finish from high-altitude gardens."
     },
     {
@@ -240,7 +240,7 @@
       "intensity": 3,
       "caffeine": "medium",
       "astringency": 2,
-      "brew": { "water": "95°C / 205°F", "steep": "3 minutes", "leaf": "1 heaped tsp (3 g) per cup" },
+      "brew": { "tempC": 95, "steep": "3 min", "grams": 3, "measure": "1 heaped tsp", "note": "" },
       "description": "Medium-roasted and honeyed, balancing toasted-nut warmth with a soft floral sweetness."
     },
     {
@@ -251,7 +251,7 @@
       "intensity": 3,
       "caffeine": "medium",
       "astringency": 2,
-      "brew": { "water": "85°C / 185°F", "steep": "3 minutes", "leaf": "1 tbsp (3 g) per cup" },
+      "brew": { "tempC": 85, "steep": "3 min", "grams": 3, "measure": "1 tbsp", "note": "" },
       "description": "Honey-sweet and fruity, with ripe peach and muscatel notes and a smooth, rounded body."
     },
     {
@@ -262,7 +262,7 @@
       "intensity": 4,
       "caffeine": "medium",
       "astringency": 3,
-      "brew": { "water": "100°C / 212°F", "steep": "3 minutes", "leaf": "1 tbsp (3 g) per cup" },
+      "brew": { "tempC": 100, "steep": "3 min", "grams": 3, "measure": "1 tbsp", "note": "" },
       "description": "Roasted and rocky, with a deep mineral backbone, charred-nut warmth, and a ripe stone-fruit sweetness."
     },
     {
@@ -273,7 +273,7 @@
       "intensity": 4,
       "caffeine": "medium",
       "astringency": 3,
-      "brew": { "water": "95°C / 205°F", "steep": "2 minutes — it turns bitter if pushed", "leaf": "1 tbsp (3 g) per cup" },
+      "brew": { "tempC": 95, "steep": "2 min", "grams": 3, "measure": "1 tbsp", "note": "Don't push it longer — it turns bitter." },
       "description": "Intensely aromatic, with honey-orchid perfume, ripe apricot-and-lychee fruit, and a sharp, lingering finish."
     },
     {
@@ -284,7 +284,7 @@
       "intensity": 1,
       "caffeine": "medium",
       "astringency": 1,
-      "brew": { "water": "80°C / 175°F", "steep": "4–5 minutes", "leaf": "2 tbsp (3 g) per cup — the buds are fluffy" },
+      "brew": { "tempC": 80, "steep": "4–5 min", "grams": 3, "measure": "2 tbsp", "note": "The buds are fluffy, so it looks like a lot." },
       "description": "Made only from downy buds, it is pale, silky, and subtle — hay, honeydew melon, and a whisper of flowers."
     },
     {
@@ -295,7 +295,7 @@
       "intensity": 2,
       "caffeine": "low",
       "astringency": 1,
-      "brew": { "water": "85°C / 185°F", "steep": "3–4 minutes", "leaf": "2 tbsp (3 g) per cup" },
+      "brew": { "tempC": 85, "steep": "3–4 min", "grams": 3, "measure": "2 tbsp", "note": "" },
       "description": "Fuller than Silver Needle, with a fresh, hay-like sweetness, soft floral notes, and a gentle melon finish."
     },
     {
@@ -306,7 +306,7 @@
       "intensity": 3,
       "caffeine": "low",
       "astringency": 2,
-      "brew": { "water": "90°C / 195°F", "steep": "4 minutes", "leaf": "2 tbsp (3 g) per cup" },
+      "brew": { "tempC": 90, "steep": "4 min", "grams": 3, "measure": "2 tbsp", "note": "" },
       "description": "Darker and more robust than other whites, with woody, autumn-leaf depth and a dried-apricot sweetness."
     },
     {
@@ -317,7 +317,7 @@
       "intensity": 4,
       "caffeine": "medium",
       "astringency": 1,
-      "brew": { "water": "100°C / 212°F", "steep": "Rinse for 10 seconds, then steep 3 minutes", "leaf": "1 tsp (3 g) per cup" },
+      "brew": { "tempC": 100, "steep": "3 min", "grams": 3, "measure": "1 tsp", "note": "Rinse the leaves with hot water for 10 seconds first." },
       "description": "Dark, smooth, and deeply earthy, like forest floor and dark cocoa, with almost no astringency."
     },
     {
@@ -328,7 +328,7 @@
       "intensity": 5,
       "caffeine": "high",
       "astringency": 5,
-      "brew": { "water": "90°C / 195°F", "steep": "Rinse for 10 seconds, then steep 1–2 minutes", "leaf": "1 tsp (3 g) per cup" },
+      "brew": { "tempC": 90, "steep": "1–2 min", "grams": 3, "measure": "1 tsp", "note": "Rinse the leaves with hot water for 10 seconds first." },
       "description": "Sharp and bittersweet, with a strong vegetal bite, an apricot-like sweetness behind it, and plenty of grip."
     },
     {
@@ -339,7 +339,7 @@
       "intensity": 3,
       "caffeine": "medium",
       "astringency": 1,
-      "brew": { "water": "100°C / 212°F", "steep": "Rinse for 10 seconds, then steep 3 minutes", "leaf": "1 tsp (3 g) pu-erh plus 3–4 dried flowers per cup" },
+      "brew": { "tempC": 100, "steep": "3 min", "grams": 3, "measure": "1 tsp", "note": "Rinse first, and add 3–4 dried chrysanthemum flowers." },
       "description": "Earthy ripe pu-erh brewed with whole chrysanthemum flowers, which lift it with a honeyed floral brightness."
     },
     {
@@ -350,7 +350,7 @@
       "intensity": 1,
       "caffeine": "none",
       "astringency": 1,
-      "brew": { "water": "100°C / 212°F", "steep": "5 minutes", "leaf": "1 tbsp (2 g) dried flowers per cup" },
+      "brew": { "tempC": 100, "steep": "5 min", "grams": 2, "measure": "1 tbsp", "note": "" },
       "description": "Soft and honeyed, with the apple-like sweetness of whole chamomile flowers."
     },
     {
@@ -361,7 +361,7 @@
       "intensity": 2,
       "caffeine": "none",
       "astringency": 1,
-      "brew": { "water": "100°C / 212°F", "steep": "5–6 minutes", "leaf": "1 heaped tsp (3 g) per cup" },
+      "brew": { "tempC": 100, "steep": "5–6 min", "grams": 3, "measure": "1 heaped tsp", "note": "" },
       "description": "Naturally sweet and woody, with honey and vanilla notes and a round, smooth body."
     },
     {
@@ -372,7 +372,7 @@
       "intensity": 3,
       "caffeine": "none",
       "astringency": 1,
-      "brew": { "water": "100°C / 212°F", "steep": "6 minutes, then add warm milk if you like", "leaf": "1 heaped tsp (4 g) per cup" },
+      "brew": { "tempC": 100, "steep": "6 min", "grams": 4, "measure": "1 heaped tsp", "note": "Add warm milk if you like." },
       "description": "All the cinnamon-and-cardamom warmth of chai over sweet, woody rooibos, with no tea leaves at all."
     },
     {
@@ -383,7 +383,7 @@
       "intensity": 2,
       "caffeine": "none",
       "astringency": 1,
-      "brew": { "water": "100°C / 212°F", "steep": "5–6 minutes", "leaf": "1 heaped tsp (3 g) per cup" },
+      "brew": { "tempC": 100, "steep": "5–6 min", "grams": 3, "measure": "1 heaped tsp", "note": "" },
       "description": "Like a lighter, more floral rooibos, with honeyed sweetness and a dried-apricot note."
     },
     {
@@ -394,7 +394,7 @@
       "intensity": 4,
       "caffeine": "none",
       "astringency": 3,
-      "brew": { "water": "100°C / 212°F", "steep": "5 minutes", "leaf": "1 tsp (2 g) dried petals per cup" },
+      "brew": { "tempC": 100, "steep": "5 min", "grams": 2, "measure": "1 tsp", "note": "" },
       "description": "Deep ruby and sharply tart, like cranberry with a squeeze of lime, bright enough to make you pucker."
     },
     {
@@ -405,7 +405,7 @@
       "intensity": 4,
       "caffeine": "none",
       "astringency": 1,
-      "brew": { "water": "100°C / 212°F", "steep": "7–10 minutes", "leaf": "1 tsp (2 g) dried root, or 4 thin slices fresh, per cup" },
+      "brew": { "tempC": 100, "steep": "7–10 min", "grams": 2, "measure": "1 tsp", "note": "Or use 4 thin slices of fresh root." },
       "description": "Peppery and hot, with a clean, lemony bite that builds as it steeps."
     },
     {
@@ -416,7 +416,7 @@
       "intensity": 2,
       "caffeine": "none",
       "astringency": 1,
-      "brew": { "water": "100°C / 212°F", "steep": "5 minutes", "leaf": "1 tbsp (2 g) cut lemongrass per cup" },
+      "brew": { "tempC": 100, "steep": "5 min", "grams": 2, "measure": "1 tbsp", "note": "" },
       "description": "Light, sweet, and lemony, with a fresh grassy edge and none of the sourness of actual lemon."
     },
     {
@@ -427,7 +427,7 @@
       "intensity": 2,
       "caffeine": "none",
       "astringency": 1,
-      "brew": { "water": "100°C / 212°F", "steep": "5 minutes, or cold-brew overnight", "leaf": "1 tbsp (8 g) roasted barley per cup" },
+      "brew": { "tempC": 100, "steep": "5 min", "grams": 8, "measure": "1 tbsp", "note": "Also good cold-brewed overnight." },
       "description": "Toasty and grain-sweet, a bit like dark toast or coffee without any of the bitterness."
     },
     {
@@ -438,7 +438,7 @@
       "intensity": 4,
       "caffeine": "high",
       "astringency": 4,
-      "brew": { "water": "75°C / 165°F", "steep": "4–5 minutes", "leaf": "1 tbsp (5 g) per cup" },
+      "brew": { "tempC": 75, "steep": "4–5 min", "grams": 5, "measure": "1 tbsp", "note": "" },
       "description": "Herbaceous and bitter-edged, with a grassy, tobacco-like depth and a long, drying finish."
     }
   ]
